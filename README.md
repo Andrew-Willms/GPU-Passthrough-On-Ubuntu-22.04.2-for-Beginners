@@ -11,6 +11,12 @@ _This guide was created on April 4, 2023 and was last updated on April 4, 2023. 
 | 1 | [Table of Contents](#1-table-of-contents) |
 | 2 | [Introduction](#2-introduction) |
 | 3 | [Bios Settings](#3-bios-settings) |
+| 4 | [Determine Your Hardware IDs](#4-determine-your-hardware-ids) |
+| 5 | [Configure Grub](#5-configure-grub) |
+| 6 | [Configure VFIO](#6-configure-vfio) |
+| 7 | [Setup Virtual Machine Manager](#7-setup-virtual-machine-manager) |
+| 8 | [Setup Your Virtual Machine](#8-setup-your-virtual-machine) |
+| 9 | [Conclusion](#9-conclusion) |
 
 &nbsp;
 
@@ -45,7 +51,7 @@ When I was getting GPU passthrough setup I found the guides that explained the g
 
 ### General Hardware Requirements
 
-To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization. You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system.
+To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system.
 
 If you only have one GPU GPU passthrough may still be possible; you should look into "Single GPU Passthrough".
 
@@ -62,3 +68,47 @@ This guide contains the steps I used to enable GPU passthrough on my hardware, h
 ---
 
 # 3. Bios Settings
+
+&nbsp;
+
+---
+
+# 4. Determine Your Hardware IDs
+
+&nbsp;
+
+---
+
+# 5. Configure Grub
+
+&nbsp;
+
+---
+
+_Get your grubby hands off (actually this is a better description for what is done in the next section but the subtitle works better here)._
+
+&nbsp;
+
+---
+
+# 6. Configure VFIO
+
+&nbsp;
+
+---
+
+# 7. Setup Virtual Machine Manager
+
+&nbsp;
+
+---
+
+# 8. Setup Your Virtual Machine
+
+&nbsp;
+
+---
+
+# 9. Conclusion
+
+Hopefully it worked I guess?
