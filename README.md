@@ -81,10 +81,6 @@ This guide contains the steps I used to enable GPU passthrough on my hardware, h
 
 # 5. Configure Grub
 
-&nbsp;
-
----
-
 _Get your grubby hands off (actually this is a better description for what is done in the next section but the subtitle works better here)._
 
 &nbsp;
