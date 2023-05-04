@@ -4,6 +4,22 @@ _This guide was created on April 4, 2023 and was last updated on April 4, 2023. 
 
 &nbsp;
 
+# 1. Table of Contents
+
+| # | Sections |
+| --- | ------------- |
+| 1 | [Table of Contents](#1-table-of-contents) |
+| 2 | [Introduction](#2-introduction) |
+| 3 | [Bios Settings](#3-bios-settings) |
+
+&nbsp;
+
+---
+
+# 2. Introduction
+
+&nbsp;
+
 ### Acknowledgements
 The information in this guide is primarly taken from [this answer](https://askubuntu.com/a/1410487/1692619) on [askubuntu.com](https://askubuntu.com/). 
 Other resources this draws from are:
@@ -17,7 +33,6 @@ Other resources this draws from are:
 
 &nbsp;
 
----
 
 ### Experience Level
 
@@ -27,11 +42,10 @@ When I was getting GPU passthrough setup I found the guides that explained the g
 
 &nbsp;
 
----
 
 ### General Hardware Requirements
 
-To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization. You must also have two GPUs (one of these can be the integrated graphics on many CPUs). One GPU will display the graphics on the guest machine while the other (this is the one that can be an iGPU) will display the graphics for the host system.
+To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization. You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system.
 
 If you only have one GPU GPU passthrough may still be possible; you should look into "Single GPU Passthrough".
 
@@ -46,3 +60,5 @@ This guide contains the steps I used to enable GPU passthrough on my hardware, h
 &nbsp;
 
 ---
+
+# 3. Bios Settings
