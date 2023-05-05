@@ -42,9 +42,11 @@ Other resources this draws from are:
 
 ### Experience Level
 
-I installed linux for the first time two days before writing these instructions. GPU passthrough can be hard but, hardware gods allowing, you too can enable high performance graphics in your virtual environment.
+I installed linux for the first time two days before writing these instructions. GPU passthrough can be hard but, hardware gods permitting, you too can achieve high performance graphics in your virtual environment.
 
-When I was getting GPU passthrough setup I found the guides that explained the goal of each step invaluable in troubleshooting so I will attempt to do the same. Since I am quite new to this my explanations may not be entirely correct or may be lacking; if you have a better explanation for something and would like to help improve this guide please let me know.
+In general this guide will be targeted at those who are new to [GNU + Linux](https://www.reddit.com/r/copypasta/comments/63oudw/gnu_linux/).
+
+When I was getting GPU passthrough setup, I found the guides that also explained the purpose of each step invaluable in troubleshooting so I will attempt to do the same. Since I am quite new to this my explanations may not be entirely correct or may be lacking; if you have a better explanation for something and would like to help improve this guide please let me know.
 
 &nbsp;
 
@@ -187,6 +189,7 @@ Note: According to [this timestamp](https://youtu.be/jc3PjDX-CGs?t=220) of one o
 
 Other useful commands include:
 - `lscpi` which lists the PCI devices in your system.
+- `lspci -n` which lists the IDs of the PCI devices in your system. (Okay I admit, this one doesn't seem that useful but I wanted to list it for completionism).
 - `lcpci -nn` which lists the PCI devices in your system _and their PCI IDs_.
 - `lscpi -nnk` which lists the PCI devices in your system, their PCI IDs, and some other information about them _including which driver they are using_ (which will be useful later).
 
@@ -194,9 +197,84 @@ Other useful commands include:
 
 ---
 
+### Important Note:
+Step 
+
+---
 # 5. Configure Grub
 
 _Get your grubby hands off (actually this is a better description for what is done in the next section but the subtitle works better here)._
+
+What you actually do in this section is enable IOMMU in [grub](https://itsfoss.com/what-is-grub/) and tell grub what devices are going to be used for PCI passthrough.
+
+Run the following command to open up the grub config file. You can use `vim` or any other text editor instead of `nano` if you prefer.
+```
+$ sudo nano /etc/default/grub
+```
+
+The file that that command opens should look something like this:
+```
+  GNU nano 6.2                                           /etc/default/grub                                                     
+# /boot/grub/grub.cfg.
+# For full documentation of the options in this file, see:
+#   info -f grub -n 'Simple configuration'
+
+GRUB_DEFAULT=0
+GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT=0
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX=""
+
+# Uncomment to enable BadRAM filtering, modify to suit your needs
+# This works with Linux (no patch required) and with any kernel that obtains
+# the memory map information from GRUB (GNU Mach, kernel of FreeBSD ...)
+#GRUB_BADRAM="0x01234567,0xfefefefe,0x89abcdef,0xefefefef"
+
+# Uncomment to disable graphical terminal (grub-pc only)
+#GRUB_TERMINAL=console
+
+# The resolution used on graphical terminal
+```
+
+Change the line <br>
+`GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"` to <br>
+```GRUB_CMDLINE_LINUX_DEFAULT="quiet splash intel_iommu=on kvm.ignore_msrs=1 video=efifb:off vfio-pci.ids=1002:73ef,1002:ab28"```
+- `intel_iommu_on` enables IOMMU in grub. If you have an AMD system use `amd_iommu=on` instead.
+- `kvm.ignore_msrs=1` presumably makes something ignore something else (sorry, that's all I have).
+- `video=efifb:off` presumably tells grub not to use video drivers on the GPU to pass through. Not all guides included this bit but this is one of the steps that finally got it working for me and I haven't A/B tested to ensure this is indeed necessar.
+- `vfio-pci.ids=1002:73ef,1002:ab28` tells grub which devices you want to pass through. Again, not all guides included this but it was one of the steps that finally got GPU passthrough working for me.
+
+Save and exit the file.
+
+Execute `sudo grub-mkconfig -o /boot/grub/grub.cfg` to update the grub configuration. The output should look something like this:
+```
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/init-select.cfg'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-5.19.0-41-generic
+Found initrd image: /boot/initrd.img-5.19.0-41-generic
+Found linux image: /boot/vmlinuz-5.19.0-32-generic
+Found initrd image: /boot/initrd.img-5.19.0-32-generic
+Memtest86+ needs a 16-bit boot, that is not available on EFI, exiting
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+```
+
+Reboot your system. (Hint: `sudo reboot` is likely the quickest way to do this).
+
+Once you have rebooted your system check that IOMMU is enabled by executing `sudo dmesg | grep -i -e DMAR -e IOMMU`.
+
+The terminal output should look something like this
+```
+insert here
+```
+
+After subsequent reboots of your system this command won't necessarily yield any output. My understanding is that this command basicaly checks a log file for instances of `"DMAR"` and `"IOMMU"` (grep is a command line formatting tool) and prints the relevant lines. The log file in question will probably only contains instances of `"DMAR"` and `"IOMMU"` after running `sudo grub-mkconfig -o /boot/grub/grub.cfg` and rebooting so running `sudo dmesg | grep -i -e DMAR -e IOMMU` on after subsequent reboots will likely yield no results.
+
 
 &nbsp;
 
