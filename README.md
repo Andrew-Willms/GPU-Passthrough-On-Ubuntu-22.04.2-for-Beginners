@@ -167,27 +167,22 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
 	            00:15.2 Serial bus controller [0c80]: Intel Corporation Device [8086:7ace] (rev 11)
         IOMMU Group 9:
 	            00:16.0 Communication controller [0780]: Intel Corporation Device [8086:7ae8] (rev 11)
+	
     </details>
-
-&nbsp;
 
     This script prints out each IOMMU group in your system, the devices in those groups, and the PCI IDs of those devices. The PCI IDs of each device are listed in square brackets `[]` after the device name. Look for the devices(s) relating to the GPU you wish to pass through and take not of their PCI IDs.
 
-    For example the lines
+    For example the lines in my ouput  
     ```
     IOMMU Group 19:
 	        03:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Device [1002:73ef] (rev c1)
     ...
     IOMMU Group 20:
             03:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Navi 21 HDMI Audio [Radeon RX 6800/6800 XT / 6900 XT] [1002:ab28]
-    ```
+    ```  
     represent my GPU and my GPU's HDMI audio interface, respectively (both of which I, and probably you as well, want to pass to your VM). The IDs for these devices on my system are "1002:73ef" and "1002:ab28".
 
-&nbsp;
-
     Note: According to [this timestamp](https://youtu.be/jc3PjDX-CGs?t=220) of one of the Youtube videos linked above, if you wish to pass an IOMMU device to your VM you must pass through all the devices in the same IOMMU group. This can pose challenges if the device you wish to passthrough is not alone in its group (though it seems like GPUs are generally in their own group). Should you run into the a related problem, the linked video persents a work around.
-
-&nbsp;
 
     Other useful commands include:
     - `lscpi` which lists the PCI devices in your system.
@@ -200,7 +195,7 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
 ---
 
 ### Important Note:
-Step 
+(when you are done steps 5 and 6 you're host operating system should not be able to use the dgpu, it should be black on boot)
 
 ---
 # 5. Configure Grub
