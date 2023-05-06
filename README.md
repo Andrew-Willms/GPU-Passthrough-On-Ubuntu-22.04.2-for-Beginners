@@ -83,6 +83,20 @@ I also
 
 Advanced Mode > PCAsomthing > IOMMU
 
+
+Advanced Mode > Advanced > CPU Configuration > Itel (VMX) Virtualizatoin Technology
+
+Advanced Mode > Advanced > System Agent (SA) Configuration > VT-d: Enabled
+                                                             Control Iommu Pre-boot Behavior: Enagle IOMMU during boot
+
+Advanced Mode > Advanced\System Agent (SA) Configuration\Graphics Configuration > Primarry Display: CPU Graphics
+
+check
+Advanced Mode > Advanced > CPU Configuration > Intel VT-x Technology (Supported)
+
+ReSize BAR (along the top bar) - off
+
+
 &nbsp;
 
 ---
