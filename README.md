@@ -59,7 +59,7 @@ If you only have one GPU GPU passthrough may still be possible; you should look 
 
 My hardware setup:
 - Intel i9-12900k
-- Asus Prime Z690-P Wifi D4
+- Asus Prime Z690-P Wifi D4 (BIOS version 2212, release date 2022/12/13)
 - 64 GB of DDR4 4000 CL18
 - Gigabyte Radeon RX 6650 XT
 
