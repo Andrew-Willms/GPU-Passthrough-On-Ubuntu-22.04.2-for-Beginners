@@ -485,7 +485,7 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 
 &nbsp;
 
-6. Select the amount of memory and CPU cores you want to dedicate to the virtual machine. The optimal configuration of this will depend on what you intend on using your host and guest machines for and the specifications of your hardware. I intend on using my virtual machine for high performance applications such as 3D CAD and so I will dedicate 49152 of my 64018 MB of memory and 16 of my 24 CPU cores to the virtual machine. When you are done specifying the memory and CPU cores press the `Forward` button.
+6. Select the amount of memory and CPU cores you want to dedicate to the virtual machine. The optimal configuration of this will depend on what you intend on using your host and guest machines for and the specifications of your hardware. I intend on using my virtual machine for high performance applications such as 3D CAD and so I will dedicate 49152 of my 64018 MB of memory and 12 of my 24 CPU cores to the virtual machine. When you are done specifying the memory and CPU cores press the `Forward` button.
 
 &nbsp;
 
@@ -494,6 +494,25 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 &nbsp;
 
 8. Check the `Customize configuration before install` checkbox. On this scree you can alos specify the name of the virtual machine. Feel free to do this now, however the name, title, and description can all be changed later. Once you are done press the `Finish` button.
+
+&nbsp;
+
+I am going to get back to performance stuff later so just leaving this here for now.
+9. This step is a performance optimization suggested at [this timestamp](https://youtu.be/wxxP39cNJOs?t=531) of a Youtube video. I have no idea what it does so partake in this step at your own risk.
+    In the window that pops up after completing the last step 
+    Locate the portion
+    ```
+    <clock offset="localtime">
+      <timer name="rtc" tickpolicy="catchup"/>
+      <timer name="pit" tickpolicy="delay"/>
+      <timer name="hpet" present="no"/>
+      <timer name="hypervclock" present="yes"/>
+    </clock>
+    ```
+
+
+
+&nbsp;
 
 &nbsp;<br />
 &nbsp;<br />
