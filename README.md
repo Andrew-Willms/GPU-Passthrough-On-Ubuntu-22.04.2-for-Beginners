@@ -1,4 +1,4 @@
-# GPU Passthrough for Beginners
+# GPU Passthrough On Ubuntu 22.04.2 for Beginners
 
 **GPU passthrough with an Intel CPU, AMD GPU, and Asus Motherboard on Ubuntu 22.04.2 LTS (including instructions for other hardware).**
 
@@ -393,7 +393,7 @@ If you aren't sure which of these lines you need and want to test, you can comme
 
 &nbsp;
 
-6. Execute `sudo update-initramfs -u` (on arch based systems you may need to run the command `sudo mkinitcpio -p linux`). This command can take a while to run (~one minute on my system), wait for it to complete.
+6. Execute `sudo update-initramfs -u`. This command can take a while to run (~one minute on my system), wait for it to complete.
 
 &nbsp;
 
@@ -424,6 +424,24 @@ If you aren't sure which of these lines you need and want to test, you can comme
 &nbsp;
 
 # 7. Setup Virtual Machine Manager
+
+1. Intall:
+    - [QEMU](https://www.qemu.org/): A hardware emulator for the CPU. 
+    - [KVM](https://www.linux-kvm.org/page/Main_Page) (Kernel-based Virtualization Machine): A virtualization technology that allows the linux kernel to act as a hypervisor. 
+    - [livirt](https://libvirt.org/): A virtual machine management tool.
+    - bridge-utils: A utilities for configuring ethernet bridges on Ubuntu.
+    
+    by executing `sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils`.
+
+&nbsp;
+
+2. Add a user to libvirt by executing `sudo adduser YourUserNameHere libvirtd`. I don't know if the username you provide needs to be the same as that of your account on the computer but I would assume so.
+
+    If you get an error telling you that the group libfirtd does not exist execute `sudo addgroup libvirtd` then execude the above command again.
+
+&nbsp;
+
+3. Install Virtual Machine Manager by executing `sudo apt-get install virt-manager`.
 
 &nbsp;<br />
 &nbsp;<br />
