@@ -387,13 +387,25 @@ In thi s section we configure the VFIO drivers. The VFIO drivers run on the host
 
 7. Reboot your system.
 
-**Important Note:** When you reboot your system the monitors connected to the GPU you are passing through should not output anything (at least once you reach Ubuntu, they may still show the BIOS). This is intentional and likely means that the VFIO drivers are operating correctly. If the host operating system is outputting to these monitors you will very likely run into error 43 "Windows has stopped this device because it has reported problems. (Code 43)" on the guest operating system.
+    **Important Note:** When you reboot your system the monitors connected to the GPU you are passing through should not output anything (at least once you reach Ubuntu, they may still show the BIOS). This is intentional and likely means that the VFIO drivers are operating correctly. If the host operating system is outputting to these monitors you will very likely run into error 43 "Windows has stopped this device because it has reported problems. (Code 43)" on the guest operating system.
 
 &nbsp;
 
-8. Execute `lspci -nnk` to view all the PCI devices in your system and the drivers they are using.
+8. Execute `lspci -nnk` to view all the PCI devices in your system and the drivers they are using. For the device(s) you are passing through the `Kernel driver in use:` section should say `vfio-pci`. If it instead says something like `amdgpu`, `nvidia`, or `nouveau` then something is wrong and the VFIO drivers did not properly take control of these devices. My best advice to you is read over the above steps carefully and ensure you executed them correclty.
 
-
+    <details>
+        <summary>The output for the relevant devices on my system looks like this:</summary>
+        
+        03:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Device [1002:73ef] (rev c1)
+	        Subsystem: Gigabyte Technology Co., Ltd Device [1458:2405]
+	        Kernel driver in use: vfio-pci
+    	    Kernel modules: amdgpu
+        03:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Navi 21 HDMI Audio [Radeon RX 6800/6800 XT / 6900 XT] [1002:ab28]
+	        Subsystem: Advanced Micro Devices, Inc. [AMD/ATI] Navi 21 HDMI Audio [Radeon RX 6800/6800 XT / 6900 XT] [1002:ab28]
+	        Kernel driver in use: vfio-pci
+	        Kernel modules: snd_hda_intel
+        
+    </details>
 
 &nbsp;<br />
 &nbsp;<br />
