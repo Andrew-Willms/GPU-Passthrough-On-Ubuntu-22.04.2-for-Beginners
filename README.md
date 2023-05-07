@@ -184,13 +184,16 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
 
     Note: According to [this timestamp](https://youtu.be/jc3PjDX-CGs?t=220) of one of the Youtube videos linked above, if you wish to pass an IOMMU device to your VM you must pass through all the devices in the same IOMMU group. This can pose challenges if the device you wish to passthrough is not alone in its group (though it seems like GPUs are generally in their own group). Should you run into the a related problem, the linked video persents a work around.
 
+    Note: According to [this part](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=If%20You%20see%20text%20%22Kernel%20driver%20in%20use%3A%20nvidia%22%20like%20below%3A) of the main source of this guide, the proprietary nVidia drivers don't work with GPU passthrough and will have to be replaced by the Nouveau open source drivers. The link above provides some instruction for this.
+
+nbsp;
+
     Other useful commands include:
     - `lscpi` which lists the PCI devices in your system.
     - `lspci -n` which lists the IDs of the PCI devices in your system. (Okay I admit, this one doesn't seem that useful but I wanted to list it for completionism).
     - `lcpci -nn` which lists the PCI devices in your system _and their PCI IDs_.
     - `lscpi -nnk` which lists the PCI devices in your system, their PCI IDs, and some other information about them _including which driver they are using_ (which will be useful later).
 
-    Note: According to [this part](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=If%20You%20see%20text%20%22Kernel%20driver%20in%20use%3A%20nvidia%22%20like%20below%3A) of the main source of this guide, the proprietary nVidia drivers don't work with GPU passthrough and will have to be replaced by the Nouveau open source drivers. The link above provides some instruction for this.
 
 &nbsp;<br />
 &nbsp;<br />
