@@ -505,10 +505,33 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 
 &nbsp;
 
-11. 
+11. Video QXL > Model: QXL (this is the default)
 
+12. Display Spice > Listen Type: Address, Address: Hypervisor Default, Port: Auto
 
+12. Boot Options > Check SATA CDROM1, move it to the top
 
+13. Add Hardware > Storage > Device Type: CDROM device
+
+14. SATA CDROM2 > Browse > Browse Local > virtio-win .iso
+
+15. SATA Disk 1 > Disk bus > VirtIO
+
+16. NIC > Device Model > virtio
+
+17. ![image](https://user-images.githubusercontent.com/38842568/236703187-ee1e6439-277f-4d64-b1a9-588856da1437.png)
+
+18. `Begin Installation` in the top left.
+
+19. Click through Windows install until, "We couldn't find any drivers. To get a storage driver, click Load driver", click `Load driver`, click `OK`, select `Red Hat VirtIO SCSI controller (E:\amd64\w10\viostor.inf)`. Windows should now be able to see the disk. Follow through the install then it should reboot into windows installer.
+
+20. In windows go to `CD Drive (E:) virtio-win-[version number]`. Run `virtio-win-guest-tools.exe`.
+
+21. In windows install display drivers for your graphics card.
+
+22. Reboot your machine and see if it now displays on the monitor connected to your passed through GPU.
+
+23. Remove 
 
 
 &nbsp;
@@ -525,7 +548,6 @@ I am going to get back to performance stuff later so just leaving this here for 
       <timer name="hypervclock" present="yes"/>
     </clock>
     ```
-
 
 
 &nbsp;
