@@ -372,9 +372,18 @@ In thi s section we configure the VFIO drivers. The VFIO drivers run on the host
 &nbsp;
 
 4. In this step we tell the regular GPU drivers to not run until after the VFIO drivers have started.
+ 
     - If the GPU you wish to pass through is an AMD gpu add the lines `softdep amdgpu pre: vfio-cpi` and `softdep radon pre: vfio-pci` to the config file.
+
     - If the GPU you wish to pass through is an nVidia GPU with proprietary drivers add the line `softdep nvidia pre: vfio-cpi`.
+
     - If the GPU you wish to pass through is an nVidia GPU with the open source drivers you should probably add the line `softdep nouveau pre: vfio-cpi`. I say "probably" because I did not see any guides suggesting this step but adding the equivalent lines for my AMD GPU was critical and `softdep nouveau pre: vfio-cpi` follows the pattern of what is needed in the other configurations.
+If you aren't sure which of these lines you need and want to test, you can comment out lines by adding a `#` at the begginning
+
+    <details>
+	<summary>Tip</summary>
+	    If you aren't sure which of these lines you need and want to test, you can comment out lines by adding a `#` at the begginning.
+    </details>
 
 &nbsp;
 
