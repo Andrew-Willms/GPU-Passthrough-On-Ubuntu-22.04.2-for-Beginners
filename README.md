@@ -1,4 +1,4 @@
-# GPU Passthrough with an Intel CPU and AMD GPU on Ubuntu 22.04.2 LTS Using IOMMU, QEMU, and Virtual Machine Manager.
+# GPU Passthrough for Beginners
 
 _This guide was created on May 3, 2023 and was last updated on May 7, 2023. In case I forget to change the "last updated" date check the commit history._
 
@@ -54,11 +54,12 @@ To perform GPU passthrough you must have a CPU, motherboard, and Bios that suppo
 
 If you only have one GPU GPU passthrough may still be possible; you should look into "Single GPU Passthrough".
 
-My hardware setup:
+My system specifications:
 - Intel i9-12900k
 - Asus Prime Z690-P Wifi D4 (BIOS version 2212, release date 2022/12/13)
 - 64 GB of DDR4 4000 CL18
 - Gigabyte Radeon RX 6650 XT
+- Ubuntu 22.04.2 LTS
 
 This guide contains the steps I used to enable GPU passthrough on my hardware, however I have attempted to include alternative nVidia and Intel instructions where applicable.
 
