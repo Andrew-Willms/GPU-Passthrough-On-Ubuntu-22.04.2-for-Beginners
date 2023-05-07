@@ -441,13 +441,42 @@ If you aren't sure which of these lines you need and want to test, you can comme
 
 &nbsp;
 
-3. Install Virtual Machine Manager by executing `sudo apt-get install virt-manager`.
+3. Install Virtual Machine Manager by executing `sudo apt-get install virt-manager`. Virtual Machine Manager is a GUI tool for managing and configuring virtual machines.
+
+&nbsp;
+
+4. Launch Virtual Machine Manager by executing `virt-manager` or by pressing the `Super` key, typing `Virtual Machine Manager`, and pressing `Enter`.
+
+&nbsp;
+
+5. In the menu bar go to `Edit > General` and check the `Enable XML editing` box.
 
 &nbsp;<br />
 &nbsp;<br />
 &nbsp;
 
 # 8. Setup Your Virtual Machine
+
+There are multiple ways of setting up a virtual machine. In this guide we will create a Windows 10 virtual machine with a few tweaks that will aledgedly improve performance.
+
+&nbsp;
+
+1. Download a windows 10 iso file. This can be downloaded on the [Microsoft Website](https://www.microsoft.com/en-ca/software-download/windows10ISO).
+
+&nbsp;
+
+2. Download the virtio drivers for Windows. To do this:
+    - Go to [this page](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/?C=M;O=D) of [fedorapeople.org](https://fedorapeople.org).
+    - Enter the folder of the most recent release (the top one). At the time of writing this is [virtio-win-0.1.229-1/](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/).
+    - Download the `cirtio-win.iso` file by clicking on the corresponding link.
+
+&nbsp;
+
+3. In Virtual Machine Manager, in the top left just under `File` press the "Create a new virtual machine" button.
+
+&nbsp;
+
+2. 
 
 &nbsp;<br />
 &nbsp;<br />
