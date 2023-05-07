@@ -497,6 +497,22 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 
 &nbsp;
 
+9. In the window that poppped up at the completion of the last step go to the `Overview` tab and under `Hypervisor Details > Firmware` select `UEFI x86_64: /usr/share/OVMF/OVMF_CODE_4M.ms.fd`.
+
+&nbsp;
+
+10. Click the `Add Hardware` button in the bottom left. Select the `PCI Host Device` category in the left sidebar of the window that popped up, and select the GPU that you passed through. Complete this for all devices you wish to pass through. For me I have to add two devices, `0000:03:00:0 Advanced Micro Devices, Inc. [AMD/ATI]` and `0000:03:00:1 Advanced Micro Devices, Inc. [AMD/ATI] Navi 21 HDMI Audio [Radeon RX 6800/6800 XT / 6900 XT]`.
+
+&nbsp;
+
+11. 
+
+
+
+
+
+&nbsp;
+
 I am going to get back to performance stuff later so just leaving this here for now.
 9. This step is a performance optimization suggested at [this timestamp](https://youtu.be/wxxP39cNJOs?t=531) of a Youtube video. I have no idea what it does so partake in this step at your own risk.
     In the window that pops up after completing the last step 
