@@ -1,6 +1,6 @@
 # GPU Passthrough with an Intel CPU and AMD GPU on Ubuntu 22.04.2 LTS Using IOMMU, QEMU, and Virtual Machine Manager.
 
-_This guide was created on April 3, 2023 and was last updated on April 4, 2023. In case I forget to change the "last updated" date check the commit history._
+_This guide was created on May 3, 2023 and was last updated on May 7, 2023. In case I forget to change the "last updated" date check the commit history._
 
 &nbsp;
 
