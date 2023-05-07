@@ -50,7 +50,7 @@ When I was getting GPU passthrough setup, I found the guides that also explained
 
 ### General Hardware Requirements
 
-To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system.
+To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system. It is also very helpful to have at least two monitors, with at least one to connect to each GPU. If you do not have multiple monitors you will have to switch your single monitor between your GPUs and this may be very annoying.
 
 If you only have one GPU GPU passthrough may still be possible; you should look into "Single GPU Passthrough".
 
@@ -189,7 +189,7 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
 
     Note: According to [this timestamp](https://youtu.be/jc3PjDX-CGs?t=220) of one of the Youtube videos linked above, if you wish to pass an IOMMU device to your VM you must pass through all the devices in the same IOMMU group. This can pose challenges if the device you wish to passthrough is not alone in its group (though it seems like GPUs are generally in their own group). Should you run into the a related problem, the linked video persents a work around.
 
-    Note: According to [this part](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=If%20You%20see%20text%20%22Kernel%20driver%20in%20use%3A%20nvidia%22%20like%20below%3A) of the main source of this guide, the proprietary nVidia drivers don't work with GPU passthrough and will have to be replaced by the Nouveau open source drivers. The link above provides some instruction for this.
+    Note: According to [this part](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=If%20You%20see%20text%20%22Kernel%20driver%20in%20use%3A%20nvidia%22%20like%20below%3A) of the main source of this guide, the proprietary nVidia drivers don't work with GPU passthrough and will have to be replaced by the Nouveau open source drivers. The link above provides some instruction for this. That being said, in other guides (for example [this one](https://www.youtube.com/watch?v=KVDUs019IB8)) the proprietary nVidia drivers are used.
 
     &nbsp;
 
@@ -354,13 +354,46 @@ What you actually do in this section is enable IOMMU in [grub](https://itsfoss.c
 &nbsp;
 
 # 6. Configure VFIO
+In thi s section we configure the VFIO drivers. The VFIO drivers run on the host machine instead of the regular drivers and allow the guest machine to access the passed-through GPU.
+
+&nbsp;
+
+1. Edit the configuration file for [VFIO](https://docs.kernel.org/driver-api/vfio.html#:~:text=The%20VFIO%20driver%20is%20an,non%2Dprivileged%2C%20userspace%20drivers.) by executing `sudo nano /etc/modprobe.d/vfio.conf` (or use your text editor of choice). Most likely this configuration file does not yet exist and so running this command will create a new, emtpy file.
+
+&nbsp;
+
+2. Add the line `options vfio-pci ids=X` to the config file, where `X` is a comma separated list of all the PCI IDs of the devices you want to pass through. In my case `X` is `1002:73ef,1002:ab28`. This specifies which devices the VFI) driver needs to be run on.
+
+&nbsp;
+
+3. If your CPU is an Intel CPU add the line `blacklist snd_hda_intel`. I don't know what this line does but several guides included it and it doesn't seem to cause problems on my system. My assumption is that it tells something not to run on startup, but I don't know what that something is or why a CPU driver would be relevant to GPU passthrough.
+
+&nbsp;
+
+4. In this step we tell the regular GPU drivers to not run until after the VFIO drivers have started.
+    - If the GPU you wish to pass through is an AMD gpu add the lines `softdep amdgpu pre: vfio-cpi` and `softdep radon pre: vfio-pci` to the config file.
+    - If the GPU you wish to pass through is an nVidia GPU with proprietary drivers add the line `softdep nvidia pre: vfio-cpi`.
+    - If the GPU you wish to pass through is an nVidia GPU with the open source drivers you should probably add the line `softdep nouveau pre: vfio-cpi`. I say "probably" because I did not see any guides suggesting this step but adding the equivalent lines for my AMD GPU was critical and `softdep nouveau pre: vfio-cpi` follows the pattern of what is needed in the other configurations.
+
+&nbsp;
+
+5. Save and exit the file.
+
+&nbsp;
+
+6. Execute `sudo update-initramfs -u` (on arch based systems you may need to run the command `sudo mkinitcpio -p linux`). This command can take a while to run (~one minute on my system), wait for it to complete.
+
+&nbsp;
+
+7. Reboot your system.
+
+**Important Note:** When you reboot your system the monitors connected to the GPU you are passing through should not output anything (at least once you reach Ubuntu, they may still show the BIOS). This is intentional and likely means that the VFIO drivers are operating correctly. If the host operating system is outputting to these monitors you will very likely run into error 43 "Windows has stopped this device because it has reported problems. (Code 43)" on the guest operating system.
+
+&nbsp;
+
+8. Execute `lspci -nnk` to view all the PCI devices in your system and the drivers they are using.
 
 
-
-
-
-### Important Note:
-(when you are done steps 5 and 6 you're host operating system should not be able to use the dgpu, it should be black on boot)
 
 &nbsp;<br />
 &nbsp;<br />
