@@ -80,8 +80,9 @@ In my BIOS (Asus Prime Z690-P Wifi D4, BIOS version 2212) I had to enable:
 
 I also noted that `Advanced Mode > Advanced \ CPU Configuration \ Intel VT-x Technology` said `Supported`.
 
-### Important Note:
-In order to get my GPU working with my virtual machine, I had to turn resizable bar ("ReSize BAR" in the top bar of my BIOS) off. I don't knot if this step is required for all systems with support for resizable bar, but it was for mine.
+&nbsp;
+
+**Important Note:** In order to get my GPU working with my virtual machine, I had to turn resizable bar ("ReSize BAR" in the top bar of my BIOS) off. I don't knot if this step is required for all systems with support for resizable bar, but it was for mine.
 
 &nbsp;<br />
 &nbsp;<br />
@@ -98,6 +99,7 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
         <summary>A note for linux newbies like myself:</summary>
   
         To run the bash script copy-paste it into your linux terminal (which can helpfully be opened by pressint `ctrl+alt+t`) and hitting enter. If you're new to terminals like I am, you don't paste into a terminal using `ctrl+v`. In Ubuntu's defauilt terminal you have to right click and select paste (hopefully there is a more convenient way because clicking is annoying).
+	
     </details>
 
     ```bash
@@ -179,14 +181,17 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
     ...
     IOMMU Group 20:
             03:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Navi 21 HDMI Audio [Radeon RX 6800/6800 XT / 6900 XT] [1002:ab28]
-    ```  
-    represent my GPU and my GPU's HDMI audio interface, respectively (both of which I, and probably you as well, want to pass to your VM). The IDs for these devices on my system are "1002:73ef" and "1002:ab28".
+    ```
+    
+    represent my GPU and my GPU's HDMI audio interface, respectively (both of which I, and probably you as well, want to pass to your VM). The IDs for these devices on my system are `1002:73ef` and `1002:ab28`.<br />
+
+    &nbsp;
 
     Note: According to [this timestamp](https://youtu.be/jc3PjDX-CGs?t=220) of one of the Youtube videos linked above, if you wish to pass an IOMMU device to your VM you must pass through all the devices in the same IOMMU group. This can pose challenges if the device you wish to passthrough is not alone in its group (though it seems like GPUs are generally in their own group). Should you run into the a related problem, the linked video persents a work around.
 
     Note: According to [this part](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=If%20You%20see%20text%20%22Kernel%20driver%20in%20use%3A%20nvidia%22%20like%20below%3A) of the main source of this guide, the proprietary nVidia drivers don't work with GPU passthrough and will have to be replaced by the Nouveau open source drivers. The link above provides some instruction for this.
 
-nbsp;
+    &nbsp;
 
     Other useful commands include:
     - `lscpi` which lists the PCI devices in your system.
