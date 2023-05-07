@@ -16,15 +16,13 @@ _This guide was created on April 3, 2023 and was last updated on April 4, 2023. 
 | 6 | [Configure VFIO](#6-configure-vfio) |
 | 7 | [Setup Virtual Machine Manager](#7-setup-virtual-machine-manager) |
 | 8 | [Setup Your Virtual Machine](#8-setup-your-virtual-machine) |
-| 9 | [Conclusion](#9-conclusion) |
+| 9 | [Trouble Shooting](#9-trouble-shooting) |
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
-
----
 
 # 2. Introduction
-
-&nbsp;
 
 ### Acknowledgements
 The information in this guide is primarly taken from [this answer](https://askubuntu.com/a/1410487/1692619) on [askubuntu.com](https://askubuntu.com/). 
@@ -50,7 +48,6 @@ When I was getting GPU passthrough setup, I found the guides that also explained
 
 &nbsp;
 
-
 ### General Hardware Requirements
 
 To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system.
@@ -65,9 +62,9 @@ My hardware setup:
 
 This guide contains the steps I used to enable GPU passthrough on my hardware, however I have attempted to include alternative nVidia and Intel instructions where applicable.
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
-
----
 
 # 3. Bios Settings
 
@@ -86,9 +83,9 @@ I also noted that `Advanced Mode > Advanced \ CPU Configuration \ Intel VT-x Tec
 ### Important Note:
 In order to get my GPU working with my virtual machine, I had to turn resizable bar ("ReSize BAR" in the top bar of my BIOS) off. I don't knot if this step is required for all systems with support for resizable bar, but it was for mine.
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
-
----
 
 # 4. Determine Your Hardware IDs
 In order to configure GPU passthrough you need to determine the PCI address(es) of your GPU and any other devices you wish to pass to your VM (though this guide will only focus on the GPU).
@@ -193,14 +190,10 @@ In order to configure GPU passthrough you need to determine the PCI address(es) 
     - `lcpci -nn` which lists the PCI devices in your system _and their PCI IDs_.
     - `lscpi -nnk` which lists the PCI devices in your system, their PCI IDs, and some other information about them _including which driver they are using_ (which will be useful later).
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
 
----
-
-### Important Note:
-(when you are done steps 5 and 6 you're host operating system should not be able to use the dgpu, it should be black on boot)
-
----
 # 5. Configure Grub
 
 _Get your grubby hands off (actually this is a better description for what is done in the next section but the subtitle works better here)._
@@ -346,28 +339,33 @@ What you actually do in this section is enable IOMMU in [grub](https://itsfoss.c
 
     After subsequent reboots of your system this command won't necessarily yield any output. My understanding is that this command basicaly checks a log file for instances of `"DMAR"` and `"IOMMU"` (grep is a command line formatting tool) and prints the relevant lines. The log file in question will probably only contains instances of `"DMAR"` and `"IOMMU"` after running `sudo grub-mkconfig -o /boot/grub/grub.cfg` and rebooting so running `sudo dmesg | grep -i -e DMAR -e IOMMU` on after subsequent reboots will likely yield no results.
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
-
----
 
 # 6. Configure VFIO
 
-&nbsp;
 
----
+
+### Important Note:
+(when you are done steps 5 and 6 you're host operating system should not be able to use the dgpu, it should be black on boot)
+
+&nbsp;<br />
+&nbsp;<br />
+&nbsp;
 
 # 7. Setup Virtual Machine Manager
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
-
----
 
 # 8. Setup Your Virtual Machine
 
+&nbsp;<br />
+&nbsp;<br />
 &nbsp;
 
----
+# 9. Trouble Shooting
 
-# 9. Conclusion
-
-Hopefully it worked I guess?
+See the [trouble shooting section](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=on%20another%20partition.-,TROUBLESHOOTING,-Problem%3A%20The) in this guide's [main source](https://askubuntu.com/a/1410487/1692619).
