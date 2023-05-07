@@ -426,3 +426,5 @@ In thi s section we configure the VFIO drivers. The VFIO drivers run on the host
 # 9. Trouble Shooting
 
 See the [trouble shooting section](https://askubuntu.com/questions/1406888/ubuntu-22-04-gpu-passthrough-qemu#:~:text=on%20another%20partition.-,TROUBLESHOOTING,-Problem%3A%20The) in this guide's [main source](https://askubuntu.com/a/1410487/1692619).
+
+&nbsp;
