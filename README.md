@@ -468,15 +468,32 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 2. Download the virtio drivers for Windows. To do this:
     - Go to [this page](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/?C=M;O=D) of [fedorapeople.org](https://fedorapeople.org).
     - Enter the folder of the most recent release (the top one). At the time of writing this is [virtio-win-0.1.229-1/](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/).
-    - Download the `cirtio-win.iso` file by clicking on the corresponding link.
+    - Download the `virtio-win.iso` file by clicking on the corresponding link.
 
 &nbsp;
 
-3. In Virtual Machine Manager, in the top left just under `File` press the "Create a new virtual machine" button.
+3. In Virtual Machine Manager, in the top left just under `File` press the `Create a new virtual machine` button.
 
 &nbsp;
 
-2. 
+4. Choose `Local install media (ISO image or CDROM)` and press the `Forward` button.
+
+&nbsp;
+
+5. Press the `Browse` button, then `Browse Local` in the pop-up windows, navigate to the `.iso` file you downloaded, select it, and press the `Open` button in the top right. Ensure the `Automatically detect from the installation media / source` box is checked and then press `Forward`.
+    If you are present with an error saying "You must select an OS." press `OK`, unckeck the `Automatically detect from the installation media / source` checkbox, enter "win10" in the `Choose the operating system you are isntalling:` bar, select `Microsoft WIndows 10 (win10)`, and press the `Forward` button.
+
+&nbsp;
+
+6. Select the amount of memory and CPU cores you want to dedicate to the virtual machine. The optimal configuration of this will depend on what you intend on using your host and guest machines for and the specifications of your hardware. I intend on using my virtual machine for high performance applications such as 3D CAD and so I will dedicate 49152 of my 64018 MB of memory and 16 of my 24 CPU cores to the virtual machine. When you are done specifying the memory and CPU cores press the `Forward` button.
+
+&nbsp;
+
+7. Specify the amount of storage you want to allocate to the virtual machine. Windows 10 requires a minimum of 32 GB of storage to be installed but more is generally required if you want to install sizable applications on it. Once you are done press the `Forward` button.
+
+&nbsp;
+
+8. Check the `Customize configuration before install` checkbox. On this scree you can alos specify the name of the virtual machine. Feel free to do this now, however the name, title, and description can all be changed later. Once you are done press the `Finish` button.
 
 &nbsp;<br />
 &nbsp;<br />
