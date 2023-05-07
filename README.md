@@ -71,31 +71,20 @@ This guide contains the steps I used to enable GPU passthrough on my hardware, h
 
 # 3. Bios Settings
 
-IOMMU is the technology that will allow our virtual machine to connect directly to the GPU.
+[IOMMU](https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit) is the technology that will allow our virtual machine to connect directly to the GPU.
 
-Enagle IOMMU in your bios. The exact settings that need to be change very depending on what platform you are using and the vendor of your motherboard vendor.
+The exact settings required to enable IOMMU may vary depending on the platform of your system and the vendor of your motherboard. For Intel based systems enable VT-x and VT-D. For AMD based systems enable SVM. Many BIOSs have I search feature that may help find the appropriate settings.
 
-For Intel based systems enagle VT-x and VT-D. For AMD based systems enable SVM.
+In my BIOS (Asus Prime Z690-P Wifi D4, BIOS version 2212) I had to enable:
+- `Advanced Mode > Advanced \ CPU Configuration \ Intel (VMX) Virtualizatoin Technology`
+- `Advanced Mode > Advanced \ System Agent (SA) Configuration \ VT-d: Enabled`
+- `Advanced Mode > Advanced \ System Agent (SA) Configuration \ Control Iommu Pre-boot Behavior: Enagle IOMMU during boot`
+- `Advanced Mode > Advanced \ System Agent (SA) Configuration \ Graphics Configuration \ Primarry Display: CPU Graphics`
 
-On my hardware (Asus Prime Z690-P Wifi D4) I had to enable
+I also noted that `Advanced Mode > Advanced \ CPU Configuration \ Intel VT-x Technology` said `Supported`.
 
-I also
-
-Advanced Mode > PCAsomthing > IOMMU
-
-
-Advanced Mode > Advanced > CPU Configuration > Itel (VMX) Virtualizatoin Technology
-
-Advanced Mode > Advanced > System Agent (SA) Configuration > VT-d: Enabled
-                                                             Control Iommu Pre-boot Behavior: Enagle IOMMU during boot
-
-Advanced Mode > Advanced\System Agent (SA) Configuration\Graphics Configuration > Primarry Display: CPU Graphics
-
-check
-Advanced Mode > Advanced > CPU Configuration > Intel VT-x Technology (Supported)
-
-ReSize BAR (along the top bar) - off
-
+### Important Note:
+In order to get my GPU working with my virtual machine, I had to turn resizable bar ("ReSize BAR" in the top bar of my BIOS) off. I don't knot if this step is required for all systems with support for resizable bar, but it was for mine.
 
 &nbsp;
 
