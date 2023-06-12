@@ -551,9 +551,9 @@ I am going to get back to performance stuff later so just leaving this here for 
 
 
 
+&nbsp;
 
-
-[sharing folder between linux host and windows guest](https://www.debugpoint.com/kvm-share-folder-windows-guest/)
+[sharing folder between linux host and windows guest](https://www.debugpoint.com/kvm-share-folder-windows-guest/)<br />
 [sharing folder between linux host and linux guest](https://www.debugpoint.com/share-folder-virt-manager/)
 
 
