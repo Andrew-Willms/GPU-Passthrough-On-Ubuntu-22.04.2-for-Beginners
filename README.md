@@ -52,9 +52,22 @@ When I was getting GPU passthrough setup, I found the guides that also explained
 
 ### General Hardware Requirements
 
-To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. One GPU will display the graphics for the guest system, while the other (this is the one that can be an iGPU) will display the graphics for the host system. It is also very helpful to have at least two monitors, with at least one to connect to each GPU. If you do not have multiple monitors you will have to switch your single monitor between your GPUs and this may be very annoying.
+To perform GPU passthrough you must have a CPU, motherboard, and Bios that support IOMMU virtualization (see [Bios Settings](#3-bios-settings) for details). You must also have two GPUs, one of these can be the integrated graphics found on many CPUs. A dedicated GPU will provide the graphics for the guest system, while the other (a second dedicated GPU or an iGPU) will provide the graphics for the host system. It is also very helpful to have at least two monitors, with at least one to connect to each GPU. If you do not have multiple monitors you will have to switch your single monitor between your GPUs; this may be annoying if you have to do so frequently.
+&nbsp;<br />
 
-If you only have one GPU GPU passthrough may still be possible; you should look into "Single GPU Passthrough".
+#### Single GPU Passthrough
+If you only have one GPU, GPU passthrough may still be possible; you should look into "Single GPU Passthrough". In this configuration either the host or guest controls the GPU at any given time and control can be passed between the two by executing a script.
+&nbsp;<br />
+
+#### iGPU Passthrough *\[citations needed]*
+It may be *possible* to pass an iGPU through to a guest system, though it may be much more difficult. Some of these difficulties may arise from:
+- The iGPU not having dedicate VRAM and instead sharing system ram.
+- The iGPU may share other hardware (such as media encoders and decoders) with the rest of the CPU.
+- Depending on the motherboard hardware and firmware, the iGPU may be initialized earlier, preventing the VFIO drivers from loading correctly.
+
+Some modern Intel CPUs support Intel GVT-g and Intel SR-IOV, technologies that provide ways to pass part of an iGPU to a guest system.<br />
+If you must pass an iGPU through to a guest system, good luck. You will likely need it.
+&nbsp;<br />
 
 My system specifications:
 - Intel i9-12900k
@@ -357,7 +370,7 @@ What you actually do in this section is enable IOMMU in [grub](https://itsfoss.c
 &nbsp;
 
 # 6. Configure VFIO
-In thi s section we configure the VFIO drivers. The VFIO drivers run on the host machine instead of the regular drivers and allow the guest machine to access the passed-through GPU.
+In this section we configure the VFIO drivers. The VFIO drivers run on the host machine instead of the regular drivers and allow the guest machine to access the passed-through GPU.
 
 &nbsp;
 
