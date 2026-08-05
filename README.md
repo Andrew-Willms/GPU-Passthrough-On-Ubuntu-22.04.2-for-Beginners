@@ -20,7 +20,7 @@ _This guide was created on May 3, 2023 and was last updated on July 7, 2026. In 
 | 8 | [Setup Your Virtual Machine](#8-setup-your-virtual-machine) |
 | 9 | [Trouble Shooting](#9-trouble-shooting) |
 
-&nbsp;<br />
+
 &nbsp;<br />
 &nbsp;
 
@@ -79,7 +79,6 @@ If you must pass an iGPU through to a guest system, good luck. You will likely n
 This guide contains the steps I used to enable GPU passthrough on my hardware, however I have attempted to include alternative nVidia and Intel instructions where applicable.
 
 &nbsp;<br />
-&nbsp;<br />
 &nbsp;
 
 # 3. Bios Settings
@@ -100,7 +99,6 @@ I also noted that `Advanced Mode > Advanced \ CPU Configuration \ Intel VT-x Tec
 
 **Important Note:** In order to get my GPU working with my virtual machine, I had to turn off resizable bar ("ReSize BAR" in the top bar of my BIOS). I don't know if this step is required for all systems with support for resizable bar, but it was for mine.
 
-&nbsp;<br />
 &nbsp;<br />
 &nbsp;
 
@@ -223,7 +221,6 @@ Other potentially useful commands:
 
 - `lscpi -nnk` which lists the PCI devices in your system, their PCI IDs, and some other information about them, including which driver they are using (which will be useful later).
 
-&nbsp;<br />
 &nbsp;<br />
 &nbsp;
 
@@ -468,15 +465,14 @@ _Get your grubby hands off (this is a better description for what is done in the
     One additional note: My system only shows these messages on the first reboot after reconfiguring GRUB. If I reboot a second time and then execute `sudo dmesg | grep -i -e ...` there is no output. This indicates these logs are only created if the GRUB configuration has been changed, and are not generated during subsequent reboots. For this reason, you should configure GRUB, reboot, and check `dmseg` promptly. If you reboot again before checking `dmseg`, it may be harder to tell if the GRUB configuration worked.
 
 &nbsp;<br />
-&nbsp;<br />
 &nbsp;
 
 # 6. Configure VFIO
-In this section we configure the VFIO drivers. The VFIO drivers run on the host machine instead of the regular drivers and allow the guest machine to access the passed-through GPU.
+In this section we configure the [VFIO](https://docs.kernel.org/driver-api/vfio.html#:~:text=The%20VFIO%20driver%20is%20an,non%2Dprivileged%2C%20userspace%20drivers.) drivers. The VFIO drivers run on the host machine instead of the regular drivers and allow the guest machine to access the passed-through GPU.
 
 &nbsp;
 
-1. Edit the configuration file for [VFIO](https://docs.kernel.org/driver-api/vfio.html#:~:text=The%20VFIO%20driver%20is%20an,non%2Dprivileged%2C%20userspace%20drivers.) by executing `sudo nano /etc/modprobe.d/vfio.conf` (or use your text editor of choice). Most likely this configuration file does not yet exist and so running this command will create a new, emtpy file.
+1. Edit the configuration file for VFIO by executing `sudo nano /etc/modprobe.d/vfio.conf` (or use your text editor of choice). Most likely this configuration file does not yet exist and so running this command will create a new, emtpy file.
 
 &nbsp;
 
@@ -535,10 +531,9 @@ If you aren't sure which of these lines you need and want to test, you can comme
     </details>
 
 &nbsp;<br />
-&nbsp;<br />
 &nbsp;
 
-# 7. Setup Virtual Machine Manager
+# 7. Setup Your Virtual Machine Manager
 
 1. Intall:
     - [QEMU](https://www.qemu.org/): A hardware emulator for the CPU. 
@@ -566,7 +561,6 @@ If you aren't sure which of these lines you need and want to test, you can comme
 
 5. In the menu bar go to `Edit > General` and check the `Enable XML editing` box.
 
-&nbsp;<br />
 &nbsp;<br />
 &nbsp;
 
@@ -648,7 +642,6 @@ There are multiple ways of setting up a virtual machine. In this guide we will c
 
 23. Remove 
 
-
 &nbsp;
 
 I am going to get back to performance stuff later so just leaving this here for now.
@@ -664,21 +657,13 @@ I am going to get back to performance stuff later so just leaving this here for 
     </clock>
     ```
 
-
-
 &nbsp;
 
 [sharing folder between linux host and windows guest](https://www.debugpoint.com/kvm-share-folder-windows-guest/)<br />
 [sharing folder between linux host and linux guest](https://www.debugpoint.com/share-folder-virt-manager/)
 
-
-
-
-
-
 &nbsp;
 
-&nbsp;<br />
 &nbsp;<br />
 &nbsp;
 
