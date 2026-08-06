@@ -118,7 +118,7 @@ These PCI address(es) can be determined by examinging the output of the bash scr
 
 <div style="margin: 0.7rem;"></div>
 
-To run the bash script copy-paste it into your terminal (which can helpfully be opened by pressing `ctrl + alt + t`) and hitting enter. To paste, don't press `ctrl + v` (as you would in many other programs), instead press `ctrl + shift + v` or right click and select paste.
+To run the bash script copy-paste it into your terminal (which can helpfully be opened by pressing <kbd>Ctrl + Alt + T</kbd>) and hitting enter. To paste, don't press <kbd>Ctrl + V</kbd> (as you would in many other programs), instead press <kbd>Ctrl + Shift + V</kbd> or right click and select paste.
 	
 </details>
 
@@ -300,7 +300,7 @@ _Get your grubby hands off (this is a better description for what is done in the
 
 <div style="margin: 2em;"></div>
 
-3. Save and exit the file. To do this press `ctrl + X` to exit and `Y` to confirm you want to save the file. Nano helpfully displays shortcuts for commands you may want to use at the bottom.
+3. Save and exit the file. To do this press <kbd>Ctrl + X</kbd> to exit and <kbd>Y</kbd> to confirm you want to save the file. Nano helpfully displays shortcuts for commands you may want to use at the bottom.
 
 <div style="margin: 2em;"></div>
 
@@ -511,7 +511,7 @@ In this section we configure the [VFIO](https://docs.kernel.org/driver-api/vfio.
 
 <div style="margin: 2em;"></div>
 
-5. Save and exit the file (`ctrl + X` to exit and `Y` to save).
+5. Save and exit the file (<kbd>Ctrl + X</kbd> to exit and <kbd>Y</kbd> to save).
 
 <div style="margin: 2em;"></div>
 
