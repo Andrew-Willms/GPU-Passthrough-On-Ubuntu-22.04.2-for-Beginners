@@ -17,7 +17,7 @@ _This guide was created on May 3, 2023 and was last updated on July 7, 2026. In 
 | 4 | [Determine Your Hardware IDs](#4-determine-your-hardware-ids) |
 | 5 | [Configure GRUB](#5-configure-grub) |
 | 6 | [Configure VFIO](#6-configure-vfio) |
-| 7 | [Setup Virtual Machine Manager](#7-setup-virtual-machine-manager) |
+| 7 | [Setup Your Virtual Machine Manager](#7-setup-your-virtual-machine-manager) |
 | 8 | [Setup Your Virtual Machine](#8-setup-your-virtual-machine) |
 | 9 | [Trouble Shooting](#9-trouble-shooting) |
 
@@ -710,7 +710,7 @@ There are multiple ways of setting up a virtual machine. In this guide we will s
 
 <div style="margin: 2em;"></div>
 
-23. Remove the virtual monitor from the VM... need to figure out how to do this.
+23. Remove the virtual monitor from the VM... need to remember how to do this.
 
 <div style="margin: 2em;"></div>
 
